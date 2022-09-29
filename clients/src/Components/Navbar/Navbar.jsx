@@ -8,7 +8,7 @@ import { HiShoppingCart } from "react-icons/hi";
 import { FaSearch } from "react-icons/fa";
 import Cart from "../Cart/Cart";
 import Login from "../Login/Login";
-import {removeToken} from "../../Redux/user/action";
+// import {removeToken} from "../../Redux/user/action";
 import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {
@@ -58,19 +58,19 @@ const Navbar = () => {
             onClick={() => setOpenLogout(!openLogout)}
           >
             <MdPerson className="navbar_icon" />
-            {user.firstName}
+            {user.first}
           </div>
-          {openLogout && (
+          {/* {openLogout && (
             <div className="navbar_logout" onClick={()=>dispatch(removeToken())}>
               <MdLogout className="navbar_icon" />
               <div className="navbar_logout_btn">Logout</div>
             </div>
-          )}
+          )} */}
         </div>
       ) : (
         <div className="navbar_login" onClick={() => setOpenLogin(true)}>
           <MdPerson className="navbar_icon" />
-          Login
+          Login/Register
         </div>
       )}
       <Cart openCart={openCart} setOpenCart={setOpenCart} />

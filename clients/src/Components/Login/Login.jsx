@@ -2,23 +2,22 @@ import React, { useState } from "react";
 import { Box, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import "../../styles/auth.css";
 import Modal from "@mui/material/Modal";
 import { useDispatch } from "react-redux";
+
 import {
-  setLoginLoading,
-  setLoginError,
-  addUserData,
-  setLoggedIn,
+login,
 } from "../../Redux/user/action";
 import { toast } from "react-toastify";
-
+import { Link } from "react-router-dom";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  minWidth: 400,
+  minWidth: 500,
   width: 420,
   bgcolor: "background.paper",
   // border: "2px solid #000",
@@ -30,13 +29,15 @@ const style = {
 
 export default function Login({ open, setOpen }) {
   const handleClose = () => setOpen(false);
+  const [typePass, setTypePass] = useState(false);
 
   const [userData, setUserData] = useState({
-    firstName: "",
-    lastName: "",
+    first: "",
+    last: "",
     email: "",
     password: "",
     phone: "",
+    address: "",
   });
 
   const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -53,35 +54,22 @@ export default function Login({ open, setOpen }) {
   const dispatch = useDispatch();
 
   const handleLogin = (loginData) => {
-    fetch("https://fraazo-clone.herokuapp.com/login", {
-      method: "POST",
-      body: JSON.stringify(loginData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        // console.log("res:", res);
-        if (res.errors) {
-          let error = res.errors[0];
-          // console.log("error:", error);
-          toast.error(error.msg);
-        } else if (res.message !== "Login Successful") {
-          toast.error(res.message);
-        } else {
-          toast.success(res.message);
+    dispatch(login(loginData));
+  
+  handleClose()
 
-          dispatch(setLoginLoading(true));
-          dispatch(addUserData(res));
-          dispatch(setLoggedIn(true));
-          handleClose();
-        }
-      })
-      .catch((err) => console.log(err));
+    setUserData({
+      first: "",
+      last: "",
+      email: "",
+      password: "",
+      phone: "",
+      address: "",
+    });
+ 
   };
   const handleSignup = (userData) => {
-    fetch("https://fraazo-clone.herokuapp.com/register", {
+    fetch("api/register", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
@@ -103,6 +91,15 @@ export default function Login({ open, setOpen }) {
         }
       })
       .catch((err) => console.log(err));
+
+    setUserData({
+      first: "",
+      last: "",
+      email: "",
+      password: "",
+      phone: "",
+      address: "",
+    });
   };
 
   const handleUserData = (e) => {
@@ -147,10 +144,26 @@ export default function Login({ open, setOpen }) {
                 color="success"
                 name="password"
                 value={loginData.password}
-                type="password"
+                type={typePass ? "text" : "password"}
                 onChange={handleLoginForm}
                 sx={{ mt: 3, width: "100%" }}
               />
+              <small
+                className="pass"
+                style={{ cursor: "pointer" }}
+                onClick={() => setTypePass(!typePass)}
+              >
+                {typePass ? "Hide" : "Show"}
+              </small>
+              <br />
+              <small
+                className="row my-2 text-primary"
+                style={{ cursor: "pointer" }}
+              >
+                <Link to="/forgot_password" className="col-6">
+                  Forgot password?
+                </Link>
+              </small>
             </>
           ) : (
             <>
@@ -159,7 +172,7 @@ export default function Login({ open, setOpen }) {
                 id="standard-size-normal"
                 variant="standard"
                 color="success"
-                name="firstName"
+                name="first"
                 value={userData.firstName}
                 onChange={handleUserData}
                 sx={{ mt: 4, width: "100%" }}
@@ -170,7 +183,7 @@ export default function Login({ open, setOpen }) {
                 variant="standard"
                 color="success"
                 value={userData.lastName}
-                name="lastName"
+                name="last"
                 onChange={handleUserData}
                 sx={{ mt: 3, width: "100%" }}
               />{" "}
@@ -179,8 +192,8 @@ export default function Login({ open, setOpen }) {
                 id="standard-size-normal"
                 variant="standard"
                 color="success"
-                  name="email"
-                  type="email"
+                name="email"
+                type="email"
                 value={userData.email}
                 onChange={handleUserData}
                 sx={{ mt: 3, width: "100%" }}
@@ -206,13 +219,28 @@ export default function Login({ open, setOpen }) {
                 onChange={handleUserData}
                 sx={{ mt: 3, width: "100%" }}
               />
+              <TextField
+                label="Enter your Address"
+                id="standard-size-normal"
+                variant="standard"
+                color="success"
+                name="address"
+                value={userData.address}
+                onChange={handleUserData}
+                sx={{ mt: 3, width: "100%" }}
+              />
             </>
           )}
           <Box
             sx={{ mt: 2, cursor: "pointer" }}
             onClick={() => showSignupForm(!signupForm)}
           >
-            <Typography id="modal-modal-title" variant="p" component="p">
+            <Typography
+              id="modal-modal-title"
+              variant="p"
+              color="blue"
+              component="p"
+            >
               {!signupForm
                 ? "New to Fraazo.!  Click here to Create Your Account...!"
                 : "Already Have Account.!  Click here for SignIn..!"}
@@ -238,6 +266,7 @@ export default function Login({ open, setOpen }) {
               <Button
                 variant="contained"
                 color="success"
+                disabled={loginData.email && loginData.password ? false : true}
                 sx={{
                   mt: 3,
                   width: "200px",

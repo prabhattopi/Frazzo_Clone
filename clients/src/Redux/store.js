@@ -10,11 +10,13 @@ import { composeWithDevTools } from "@redux-devtools/extension";
 import { productReducer } from "./products/reducer";
 import { userReducer } from "./user/reducer";
 import { cartReducer } from "./cart/reducer";
+import { alertReducer } from "./alert/alertReducer";
 
 const rootReducer = combineReducers({
   product: productReducer,
   user: userReducer,
   cart: cartReducer,
+  alert:alertReducer
 });
 
 export const store = createStore(

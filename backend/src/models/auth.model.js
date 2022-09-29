@@ -43,6 +43,11 @@ const userSchema = new mongoose.Schema(
       data: String,
       default: "",
     },
+    type:{
+      type:String,
+      default:"register"
+
+    }
   },
   { timestamps: true }
 );
