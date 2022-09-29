@@ -20,3 +20,9 @@ code {
   padding: 0;
   box-sizing: border-box;
 }
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+@import url(./styles/loading.css);
+@import url(./styles/alert.css);

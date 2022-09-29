@@ -13,6 +13,8 @@ import { useSelector } from"react-redux"
 import { ToastContainer } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
 import Login from "./Components/Login/Login";
+import PageNotFound from "./Components/PageNOtFound/PageNotFound";
+import Alert from "./Components/Alert/Alert";
 
 const promise = loadStripe(
   "pk_test_51L97nDSJamWgxW3FAkAQ3D2v127yEvkP8WF8YxSyrp3mGNwOxsSoeIvQNbAAgJatwVDDVLKGxpPMWpBvypXeWVN000GizGQda3"
@@ -27,17 +29,28 @@ function PrivateRoute({isLogin,children}) {
 }
 
 function App() {
+  
 
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  
+  const {token} = useSelector((state) => state.user);
   const [open, setOpen] = useState(true);
 
+
+
   return (
+  
     <div className="App">
 
 
-      div.welc
+      
 
       <Navbar />
+      
+     
+          <Alert/>
+          
+    
+      
 
       <div className="app_container_margin">
         <Routes>
@@ -57,7 +70,7 @@ function App() {
               <Elements stripe={promise}>
                 {/* <PrivateRoute isLogin={isLoggedIn}> */}
                 <Checkout />
-                {!isLoggedIn && <Login open={true} setOpen={setOpen} />}
+                {!token && <Login open={true} setOpen={setOpen} />}
                 {/* </PrivateRoute> */}
               </Elements>
             }
@@ -92,6 +105,8 @@ function App() {
             element={<ProductsList />}
           />
           <Route path="/products/:id" element={<ProductDetails />} />
+
+          <Route path="*" element={<PageNotFound/>}/>
         </Routes>
       </div>
 
@@ -109,6 +124,7 @@ function App() {
         theme="colored"
       />
     </div>
+
   );
 }
 

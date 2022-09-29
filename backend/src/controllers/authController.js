@@ -10,12 +10,16 @@ const {
   isEmail,
   isPhone,
 } = require("../middlewares/errorhandlermiddleware");
-const { generateActiveToken } = require("../config/generateToken");
+const {
+  generateActiveToken,
+  generateAccesssToken,
+  generateRefreshToken,
+} = require("../config/generateToken");
 const sendEmail = require("../config/sendMail");
 const { sendSms } = require("../config/sendSMS");
 const CLIENT_URL = `${process.env.BASE_URL}`;
 
-exports.registerController = async (req, res) => {
+const registerController = async (req, res) => {
   try {
     const { first, last, email, phone, address, password } = req.body;
     const user = await User.findOne({ email });
@@ -50,7 +54,7 @@ exports.registerController = async (req, res) => {
   }
 };
 
-exports.activeAccount = async (req, res) => {
+const activeAccount = async (req, res) => {
   try {
     const { active_token } = req.body;
     const decode = jwt.verify(
@@ -58,21 +62,85 @@ exports.activeAccount = async (req, res) => {
       `${process.env.ACTIVE_TOKEN_SECRET}`
     );
     const { newuser } = decode;
-    if(!newuser) return res.status(400).json({msg:"Invalid authentication"})
-    const user = new User(newuser);
-    await user.save();
+    if (!newuser)
+      return res.status(400).json({ msg: "Invalid authentication" });
+    const user = await User.findOne({ email: newuser.email });
+    if (user) return res.status(400).json({ msg: "Users already exits" });
+    const new_user = new User(newuser);
+    await new_user.save();
 
     res.send({ msg: "Account is Activated" });
   } catch (err) {
-    let errMsg;
-    if(err.code===11000){
-      errMsg=Object.keys(err.keyValue)[0]+" already exits"
-    }
-    else{
-    console.log(err)
-    let name=Object.keys(err.errors)[0]
-    errMsg=err.errors[`${name}`].message
-    }
-    return res.status(500).json({ msg: errMsg });
+    return res.status(500).json({ msg: err.message });
   }
+};
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ msg: `Account doesn't exists` });
+    loginUser(user, password, res);
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};
+
+const loginUser = async (user, password, res) => {
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return res.status(500).json({ msg: "Password is incorrect" });
+
+  const access_token = generateAccesssToken({ id: user._id });
+
+  const refresh_token = generateRefreshToken({ id: user._id }, res);
+
+  // await Users.findOneAndUpdate({_id: user._id}, {
+  //   rf_token:refresh_token
+  // })
+  res.cookie("refreshtoken", refresh_token, {
+    httpOnly: true,
+    path: `/api/refresh_token`,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+  });
+  return res.json({
+    msg: "Login Success!",
+    access_token,
+    user: { ...user._doc, password: "" },
+  });
+};
+
+const logout = async (req, res) => {
+  try {
+    res.clearCookie(`refreshtoken`, { path: `/api/refresh_token` });
+    return res.json({ msg: "Logged out!" });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};
+
+const refreshToken = async (req, res) => {
+  try {
+    const rf_token = req.cookies.refreshtoken;
+    if (!rf_token) {
+      return res.status(400).json({ msg: "Please Login now!" });
+    }
+    const decoded = jwt.verify(rf_token, `${process.env.REFRESH_TOKEN_SECRET}`);
+    if (!decoded.id) return res.status(400).json({ msg: "Please Login now!" });
+    const user = await User.findById(decoded.id).select("-password");
+    if (!user)
+      return res.status(400).json({ msg: "This account does not exist." });
+
+    const access_token = generateAccesssToken({ id: user._id });
+    res.json({ access_token });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};
+
+module.exports = {
+  login,
+  registerController,
+  activeAccount,
+  logout,
+  refreshToken,
 };
