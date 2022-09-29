@@ -1,11 +1,11 @@
-//Action types
+//Action Types
 export const PROD_LOADING = "PROD_LOADING";
 
 export const PROD_ERROR = "PROD_ERROR";
 
 export const ADD_ALL_PRODUCTS = "ADD_ALL_PRODUCTS";
 
-// Action creators
+// Action Creators
 
 export const setProdLoading = (payload) => {
   return {
@@ -28,7 +28,7 @@ export const setAllProducts = (data) => {
   };
 };
 
-/// this is gonna action creator which return a function which will have access to dispath function
+// this is gonna action creator which return a function which will have access to dispath function
 
 export const getProducts = () => (dispatch) => {
   dispatch(setProdLoading(true));

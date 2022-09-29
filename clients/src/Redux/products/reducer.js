@@ -1,3 +1,5 @@
+//Product Reducer
+
 import { ADD_ALL_PRODUCTS, PROD_ERROR, PROD_LOADING } from "./action";
 
 const initial = {

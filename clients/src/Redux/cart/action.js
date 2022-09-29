@@ -12,7 +12,7 @@ export const CART_LOADING = "CART_LOADING";
 
 export const EMPTY_CART = "EMPTY_CART"
 
-//action creator
+//Action creator
 
 export const addToCart = (payload) => {
   return {
@@ -48,6 +48,7 @@ export const cartLoading = (payload) => {
     payload: payload,
   };
 };
+
 
 export const emptyCart = () => {
   return {
