@@ -5,7 +5,7 @@ const colors=require("colors")
 const morgan=require("morgan")
 const cors=require("cors")
 
-
+const cookieParser=require("cookie-parser")
 
 const connectDB=require("./src/config/db")
 
@@ -20,6 +20,7 @@ connectDB()
 const app=express()
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
+app.use(cookieParser())
 
 
 app.use("/api",require("./src/routes/authroute"))
@@ -29,9 +30,10 @@ app.use("/api",require("./src/routes/authroute"))
 
 
 
+
 if(process.env.NODE_ENV==="development"){
     app.use(cors({
-        origin:process.env.CLIENT_URL
+        origin:process.env.BASE_URL
     }))
     app.use(morgan("dev"))
     //Morgan give information each reequest
