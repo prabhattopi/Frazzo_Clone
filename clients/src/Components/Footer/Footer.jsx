@@ -24,6 +24,7 @@ const Footer = () => {
                 is online platform that allows customer to get farm fresh
                 produce directly from farmers.
               </p>
+              {/* footer logo */}
             </div>
             <div className="footer_useful_links">
               <h3 className="footer_list_heading">Useful Links</h3>
