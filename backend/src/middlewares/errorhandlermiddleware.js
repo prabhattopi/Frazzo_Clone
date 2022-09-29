@@ -1,49 +1,54 @@
-"use strict";
 
-/**
- * Get unique error field name
- */
-const uniqueMessage = error => {
-    let output;
-    try {
-        let fieldName = error.message.split(".$")[1];
-        field = field.split(" dup key")[0];
-        field = field.substring(0, field.lastIndexOf("_"));
-        req.flash("errors", [{
-            msg: "An account with this " + field + " already exists."
-        }]);
-        output =
-            fieldName.charAt(0).toUpperCase() +
-            fieldName.slice(1) +
-            " already exists";
-    } catch (ex) {
-        output = "already exists";
+
+const validRegister=async function(req,res,next){
+    const {first,email,last,password}=req.body
+    const errors=[]
+    if(!first||!last){
+       errors.push("Please add your name.")
+
+    }
+    else if((first+last).length>20){
+       errors.push("Your name is up to chars long")
+
     }
 
-    return output;
-};
+    if(!email){
+      errors.push("Please add your email or Phone no.")
 
-/**
- * Get the erroror message from error object
- */
-exports.errorHandler = error => {
-    let message = "";
+    }
+    else if(!isEmail(email)&&!isPhone(phone)){
+   errors.push("Email or Phone is not valid")
 
-    if (error.code) {
-        switch (error.code) {
-            case 11000:
-            case 11001:
-                message = uniqueMessage(error);
-                break;
-            default:
-                message = "Something went wrong";
-        }
-    } else {
-        for (let errorName in error.errorors) {
-            if (error.errorors[errorName].message)
-                message = error.errorors[errorName].message;
-        }
     }
 
-    return message;
-};
+    if(password.length<6){
+     errors.push("Password length must be greater than equal to 6")
+    }
+ if(errors.length>0) return res.status(400).json({msg:errors})
+
+
+    next();
+ 
+   
+    
+
+}
+
+const isPhone=(phone)=>{
+    const re=/^[+]/g
+    return re.test(phone)
+}
+
+
+
+
+const isEmail=(email)=>{
+              
+    // Regular Expression (Not accepts second @ symbol
+    // before the @gmail.com and accepts everything else)
+    var regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      
+    // Converting the email to lowercase
+    return regexp.test(String(email).toLowerCase());
+}
+module.exports={validRegister,isEmail,isPhone}

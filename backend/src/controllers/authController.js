@@ -1,76 +1,78 @@
-const User=require("../models/auth.model")
-const expressJwt=require("express-jwt")
-const _ =require("lodash")
-const {OAuth2Client}=require("google-auth-library")
-// const fetch=require("node-fetch")
-const {validationResult}=require("express-validator")
-const jwt =require("jsonwebtoken")
-const { errorHandler } = require("../middlewares/errorhandlermiddleware")
+const User = require("../models/auth.model");
+const expressJwt = require("express-jwt");
+const _ = require("lodash");
+const { validationResult } = require("express-validator");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
-const sgMail=require("@sendgrid/mail")
-sgMail.setApiKey(process.env.MIAL_KEY)
+const {
+  errorHandler,
+  isEmail,
+  isPhone,
+} = require("../middlewares/errorhandlermiddleware");
+const { generateActiveToken } = require("../config/generateToken");
+const sendEmail = require("../config/sendMail");
+const { sendSms } = require("../config/sendSMS");
+const CLIENT_URL = `${process.env.BASE_URL}`;
 
-
-
-
-
-
-
-
-
-
-
-exports.registerController=(req,res)=>{
-    const {first,last,email,password,phone,address}=req.body
-   const errors=validationResult(req)
-   if(!errors.isEmpty()){
-    const firstError=errors.array().map(error=>error.msg)[0]
-    return res.status(422).json({
-        error:firstError
-    })
-   }
-   else{
-    User.findOne({
-        email
-    })
-    .exec((err,user)=>{
-        //if User is Exist
-
-        if(user){
-            return res.status(400).json({
-                error:"Email is taken"
-            })
-        }
-
-    }
-    )
-    //Generating Token
-    const token=jwt.sign({
+exports.registerController = async (req, res) => {
+  try {
+    const { first, last, email, phone, address, password } = req.body;
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ msg: "User Already exist" });
+    } else {
+      const passwordHashed = await bcrypt.hash(password, 12);
+      const newuser = {
         first,
         last,
         email,
-        password,
-        phone
-    },
-    process.env.JWT_ACCOUNT_ACTIVATION,
-    {
-        expiresIn:"15m"
+        phone,
+        address,
+
+        password: passwordHashed,
+      };
+      const active_token = generateActiveToken({ newuser });
+      const url = `${CLIENT_URL}/active/${active_token}`;
+      if (isEmail(email)) {
+        sendEmail(email, url, "Verify your email address");
+        return res.json({
+          msg: "Success Please Check your Email",
+        });
+      } else if (isPhone(phone)) {
+        sendSms(phone, url, "verify your Phone Number");
+        return res.json({ msg: "Success!Please check your phne" });
+      }
     }
-    )
+  } catch (error) {
+    res.status(500);
+    throw new Error("Please add all fields");
+  }
+};
 
-    const emailData={
-        from:process.env.EMIAL_FORM,
-        to:to,
-        subject:"Account is Activattion Link Thanks for Registering",
-        html:`
-        <h1>Please Click the link To acivate</h1>
-        <p>${process.env.CLIENT_URL}/users/activate/${token}</p>
-        <hr/>
-        <p>This email contain sensitive info</p>
-        <p>${process.env.CLIENT_URL}</p>
-        `
+exports.activeAccount = async (req, res) => {
+  try {
+    const { active_token } = req.body;
+    const decode = jwt.verify(
+      active_token,
+      `${process.env.ACTIVE_TOKEN_SECRET}`
+    );
+    const { newuser } = decode;
+    if(!newuser) return res.status(400).json({msg:"Invalid authentication"})
+    const user = new User(newuser);
+    await user.save();
 
+    res.send({ msg: "Account is Activated" });
+  } catch (err) {
+    let errMsg;
+    if(err.code===11000){
+      errMsg=Object.keys(err.keyValue)[0]+" already exits"
     }
-   }
-
-}
+    else{
+    console.log(err)
+    let name=Object.keys(err.errors)[0]
+    errMsg=err.errors[`${name}`].message
+    }
+    return res.status(500).json({ msg: errMsg });
+  }
+};
