@@ -51,7 +51,7 @@ const Navbar = () => {
         <IoIosWallet className="navbar_icon" />
         Credit
       </div>
-      {userData.isLoggedIn ? (
+      {userData.token ? (
         <div className="navbar_logoutWrapper">
           <div
             className="navbar_login"
@@ -60,12 +60,12 @@ const Navbar = () => {
             <MdPerson className="navbar_icon" />
             {user.first}
           </div>
-          {/* {openLogout && (
-            <div className="navbar_logout" onClick={()=>dispatch(removeToken())}>
-              <MdLogout className="navbar_icon" />
+          {openLogout && (
+            <div className="navbar_logout">
+              <MdLogout className="navbar_icon"/>
               <div className="navbar_logout_btn">Logout</div>
             </div>
-          )} */}
+          )}
         </div>
       ) : (
         <div className="navbar_login" onClick={() => setOpenLogin(true)}>
