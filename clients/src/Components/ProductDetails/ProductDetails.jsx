@@ -10,7 +10,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
-    fetch(`https://fraazo-clone.herokuapp.com/fraazo/${id}`)
+    fetch(`/fraazo/${id}`)
       .then((res) => res.json())
       .then((res) => setProduct(res));
     window.scrollTo(0, 0);

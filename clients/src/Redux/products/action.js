@@ -33,7 +33,7 @@ export const setAllProducts = (data) => {
 export const getProducts = () => (dispatch) => {
   dispatch(setProdLoading(true));
 
-  fetch("https://fraazo-clone.herokuapp.com/fraazo")
+  fetch("/fraazo")
     .then((res) => res.json())
     .then((res) => dispatch(setAllProducts(res)))
     .catch((err) => dispatch(setProdError(err)));
