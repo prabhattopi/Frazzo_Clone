@@ -131,7 +131,11 @@ const refreshToken = async (req, res) => {
       return res.status(400).json({ msg: "This account does not exist." });
 
     const access_token = generateAccesssToken({ id: user._id });
-    res.json({ access_token });
+    res.json({ 
+    
+      access_token,
+      user
+     });
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }

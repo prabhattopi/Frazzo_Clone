@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useEffect} from "react"
 import { useSelector } from 'react-redux'
 
 
@@ -7,7 +7,8 @@ import Toast from './Toast'
 
 export const Alert = () => {
   const { alert } = useSelector((state) => state)
-  console.log(alert)
+  // console.log(alert)
+
 
   return (
     <div>

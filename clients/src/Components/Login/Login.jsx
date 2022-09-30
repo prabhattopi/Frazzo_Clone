@@ -28,6 +28,7 @@ const style = {
 };
 
 export default function Login({ open, setOpen }) {
+  
   const handleClose = () => setOpen(false);
   const [typePass, setTypePass] = useState(false);
 

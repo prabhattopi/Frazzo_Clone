@@ -8,17 +8,16 @@ import { HiShoppingCart } from "react-icons/hi";
 import { FaSearch } from "react-icons/fa";
 import Cart from "../Cart/Cart";
 import Login from "../Login/Login";
-// import {removeToken} from "../../Redux/user/action";
+
 import { useSelector, useDispatch } from "react-redux";
+import { logout, reset } from "../../Redux/user/action";
 
 const Navbar = () => {
   const [openCart, setOpenCart] = useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
   const [openLogout, setOpenLogout] = useState(false);
 
-
-
-   const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const userData = useSelector((state) => state.user);
   const user = userData.user;
 
@@ -62,8 +61,17 @@ const Navbar = () => {
           </div>
           {openLogout && (
             <div className="navbar_logout">
-              <MdLogout className="navbar_icon"/>
-              <div className="navbar_logout_btn">Logout</div>
+              <MdLogout
+                className="navbar_icon"
+              
+              />
+              <div className="navbar_logout_btn" onClick={() =>{
+                dispatch(logout())
+
+                dispatch(reset())
+          
+                
+                }}>Logout</div>
             </div>
           )}
         </div>
