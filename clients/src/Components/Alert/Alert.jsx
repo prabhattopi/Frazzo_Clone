@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux'
 import Loading from './Loading'
 import Toast from './Toast'
 
-const Alert = () => {
+export const Alert = () => {
   const { alert } = useSelector((state) => state)
+  console.log(alert)
 
   return (
     <div>
@@ -33,4 +34,12 @@ const Alert = () => {
   )
 }
 
-export default Alert
+export const showErrMsg=(msg)=>{
+  return <div className="errMsg">{msg}</div>
+
+}
+
+export const showSuccessMsg=(msg)=>{
+  return <div className="successMsg">{msg}</div>
+
+}

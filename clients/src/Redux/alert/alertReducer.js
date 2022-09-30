@@ -2,8 +2,8 @@ import { ALERT } from "./alerts"
 
 const initial={
     loading:false,
-    success:""||[],
-    errors:""||[]
+    success:""|[],
+    errors:""|[]
 }
 export const alertReducer=(state=initial,{type,payload})=>{
  switch(type){

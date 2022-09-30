@@ -14,7 +14,8 @@ import { ToastContainer } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
 import Login from "./Components/Login/Login";
 import PageNotFound from "./Components/PageNOtFound/PageNotFound";
-import Alert from "./Components/Alert/Alert";
+import {Alert} from "./Components/Alert/Alert";
+import Active from "./Components/Login/Active";
 
 const promise = loadStripe(
   "pk_test_51L97nDSJamWgxW3FAkAQ3D2v127yEvkP8WF8YxSyrp3mGNwOxsSoeIvQNbAAgJatwVDDVLKGxpPMWpBvypXeWVN000GizGQda3"
@@ -41,13 +42,13 @@ function App() {
   
     <div className="App">
 
-
+<Alert/>
       
 
       <Navbar />
       
      
-          <Alert/>
+          
           
     
       
@@ -105,6 +106,7 @@ function App() {
             element={<ProductsList />}
           />
           <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/active/:id" element={<Active/>}/>
 
           <Route path="*" element={<PageNotFound/>}/>
         </Routes>

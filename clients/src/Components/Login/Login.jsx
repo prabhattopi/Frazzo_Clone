@@ -7,7 +7,7 @@ import Modal from "@mui/material/Modal";
 import { useDispatch } from "react-redux";
 
 import {
-login,
+login, register,
 } from "../../Redux/user/action";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
@@ -55,42 +55,18 @@ export default function Login({ open, setOpen }) {
 
   const handleLogin = (loginData) => {
     dispatch(login(loginData));
+    setLoginData({
+      email: "", password: ""
+    });
   
   handleClose()
 
-    setUserData({
-      first: "",
-      last: "",
-      email: "",
-      password: "",
-      phone: "",
-      address: "",
-    });
+   
  
   };
   const handleSignup = (userData) => {
-    fetch("api/register", {
-      method: "POST",
-      body: JSON.stringify(userData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.errors) {
-          let error = res.errors[0];
-          // console.log("error:", error);
-
-          toast.error(error.msg);
-        } else if (res.message !== "User created successfully") {
-          toast.error(res.message);
-        } else {
-          toast.success(res.message + "\n Now Login....!");
-          showSignupForm(!signupForm);
-        }
-      })
-      .catch((err) => console.log(err));
+    
+     dispatch(register(userData))
 
     setUserData({
       first: "",
@@ -100,6 +76,7 @@ export default function Login({ open, setOpen }) {
       phone: "",
       address: "",
     });
+    handleClose()
   };
 
   const handleUserData = (e) => {
@@ -168,12 +145,12 @@ export default function Login({ open, setOpen }) {
           ) : (
             <>
               <TextField
-                label="Enter Fist Name"
+                label="Enter First Name"
                 id="standard-size-normal"
                 variant="standard"
                 color="success"
                 name="first"
-                value={userData.firstName}
+                value={userData.first}
                 onChange={handleUserData}
                 sx={{ mt: 4, width: "100%" }}
               />
@@ -182,11 +159,11 @@ export default function Login({ open, setOpen }) {
                 id="standard-size-normal"
                 variant="standard"
                 color="success"
-                value={userData.lastName}
+                value={userData.last}
                 name="last"
                 onChange={handleUserData}
                 sx={{ mt: 3, width: "100%" }}
-              />{" "}
+              />
               <TextField
                 label="Enter your Email"
                 id="standard-size-normal"
@@ -238,12 +215,12 @@ export default function Login({ open, setOpen }) {
             <Typography
               id="modal-modal-title"
               variant="p"
-              color="blue"
+              color="gray.400"
               component="p"
             >
               {!signupForm
-                ? "New to Fraazo.!  Click here to Create Your Account...!"
-                : "Already Have Account.!  Click here for SignIn..!"}
+                ? (<>New to Fraazo.! click here <span style={{color:"red"}}>Register</span></> )
+                : (<>Already Have Account.! click here for <span style={{color:"red"}}>SignIn</span></>)}
             </Typography>
           </Box>
           <div style={{ textAlign: "center", mt: 2 }}>
@@ -258,6 +235,7 @@ export default function Login({ open, setOpen }) {
                   pt: 2,
                   pb: 2,
                 }}
+                disabled={(userData.email && userData.password && userData.address && userData.phone && userData.first &&userData.last) ? false : true}
                 onClick={() => handleSignup(userData)}
               >
                 Create Account
@@ -266,7 +244,7 @@ export default function Login({ open, setOpen }) {
               <Button
                 variant="contained"
                 color="success"
-                disabled={loginData.email && loginData.password ? false : true}
+                disabled={(loginData.email && loginData.password) ? false : true}
                 sx={{
                   mt: 3,
                   width: "200px",
