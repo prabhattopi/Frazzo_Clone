@@ -8,7 +8,6 @@ import { HiShoppingCart } from "react-icons/hi";
 import { FaSearch } from "react-icons/fa";
 import Cart from "../Cart/Cart";
 import Login from "../Login/Login";
-// import {removeToken} from "../../Redux/user/action";
 import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {

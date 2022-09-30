@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Banner from "./Banners/Banner";
-import BestDeals from "./BestDeals/BestDeals";
 import Mangoes from "./Categories/Mangoes";
 import Fruits from "./Categories/Fruits";
 import Vegetables from "./Categories/Vegetables";
@@ -22,7 +21,6 @@ const Home = () => {
     <div className="home_section">
       <div className="app_container">
         <Banner />
-        <BestDeals  />
         <ProductCategories />
         <Mangoes />
         <Fruits />

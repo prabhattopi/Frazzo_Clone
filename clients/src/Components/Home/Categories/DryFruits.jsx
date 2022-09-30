@@ -21,7 +21,6 @@ const DryFruits = () => {
         to="/products/dryfruits/premium-quality-dryfruits"
         className="linkTag"
       >
-        {" "}
         <h2 className="category_heading">
           DRY FRUITS <span className="view_all">( View All )</span>
         </h2>

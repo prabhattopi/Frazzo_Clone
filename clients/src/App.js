@@ -1,58 +1,37 @@
-import React, { useState,Children } from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { Routes, Route,Navigate } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
 import Checkout from "./Components/Checkout/Checkout";
 import Navbar from "./Components/Navbar/Navbar";
-import ProductsList from "./Components/ProductsList/ProductsList";
-import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import Login from "./Components/Login/Login";
+import Alert from "./Components/Alert/Alert";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSelector } from"react-redux"
 import { ToastContainer } from "react-toastify";
-  import "react-toastify/dist/ReactToastify.css";
-import Login from "./Components/Login/Login";
-import PageNotFound from "./Components/PageNOtFound/PageNotFound";
-import Alert from "./Components/Alert/Alert";
+import "react-toastify/dist/ReactToastify.css";
 
 const promise = loadStripe(
-  "pk_test_51L97nDSJamWgxW3FAkAQ3D2v127yEvkP8WF8YxSyrp3mGNwOxsSoeIvQNbAAgJatwVDDVLKGxpPMWpBvypXeWVN000GizGQda3"
+  "pk_test_51LnFjiSBiw6Me9peE81aB4PuPhVgGOY87Hk98o5mCODE2h6bDNUbZwrTPvoxh2PXJya9vNKfM3jXTxYkBtV0rccJ00JHO1doiL"
 );
-function PrivateRoute({isLogin,children}) {
-  if(isLogin){
-    return children
-  }
 
-  return <Navigate to="/login"></Navigate>
-
-}
 
 function App() {
-  
-
   
   const {token} = useSelector((state) => state.user);
   const [open, setOpen] = useState(true);
 
-
-
   return (
   
     <div className="App">
-
-
-      
-
       <Navbar />
-      
      
-          <Alert/>
-          
-    
-      
+      <Alert/>
 
       <div className="app_container_margin">
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -68,45 +47,13 @@ function App() {
             path="/checkout"
             element={
               <Elements stripe={promise}>
-                {/* <PrivateRoute isLogin={isLoggedIn}> */}
                 <Checkout />
                 {!token && <Login open={true} setOpen={setOpen} />}
-                {/* </PrivateRoute> */}
               </Elements>
             }
           />
 
-          <Route
-            path="/products/mangoes/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/vegetables/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/fruits/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/herbs/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/dryfruits/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/kitchenstapels/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/category/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route path="/products/:id" element={<ProductDetails />} />
-
-          <Route path="*" element={<PageNotFound/>}/>
+         
         </Routes>
       </div>
 

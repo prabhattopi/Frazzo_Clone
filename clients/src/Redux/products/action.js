@@ -28,12 +28,11 @@ export const setAllProducts = (data) => {
   };
 };
 
-// this is gonna action creator which return a function which will have access to dispath function
 
 export const getProducts = () => (dispatch) => {
   dispatch(setProdLoading(true));
 
-  fetch("https://fraazo-clone.herokuapp.com/fraazo")
+  fetch("")
     .then((res) => res.json())
     .then((res) => dispatch(setAllProducts(res)))
     .catch((err) => dispatch(setProdError(err)));

@@ -1,15 +1,15 @@
 import React from "react";
 import "./DownloadApp.css";
-import mobilesImg from "../../../Images/mobiles.png";
-import googleDownload from "../../../Images/google-play.png";
-import iosDownload from "../../../Images/apple-store.png";
-import { FaGooglePlay, FaApple } from "react-icons/fa";
+import mobImg from "../../../Images/mobiles.png";
+import google from "../../../Images/gplay.png";
+import ios from "../../../Images/apple-store.png";
+import { FaGooglePlay, FaApple, FaGoogle } from "react-icons/fa";
 
 const DownloadApp = () => {
   return (
     <div className="download_app_section">
       <div className="download_app_mobiles">
-        <img src={mobilesImg} alt="" className="mobiles_img" />
+        <img src={mobImg} alt="" className="mobiles_img" />
       </div>
       <div className="download_app_infoDiv">
         <h1>Download The App</h1>
@@ -39,9 +39,9 @@ const DownloadApp = () => {
           <button className="download_submit_btn">SUBMIT</button>
         </div>
         <div className="download_available_on">
-          Available on{" "}
-          <img src={googleDownload} alt="" className="download_from_google" />
-          <img src={iosDownload} alt="" className="download_from_ios" />
+          Available on
+          <img src={google} alt="google" className="download_from_google" />
+          <img src={ios} alt="ios" className="download_from_ios" />
         </div>
       </div>
     </div>

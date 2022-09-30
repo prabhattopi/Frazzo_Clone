@@ -3,9 +3,9 @@ import "./ProductCategories.css";
 import mangoes from "../../../Images/mangoes.png";
 import fruits from "../../../Images/fruits.png";
 import vegetables from "../../../Images/vegetables.png";
-import herbs from "../../../Images/herbs.png";
+import herbs from "../../../Images/herb.png";
 import dry_fruits from "../../../Images/dry-fruits.png";
-import kitchen_staples from "../../../Images/kitchen-saples.png";
+import kitchen_staples from "../../../Images/kitchen.png";
 import { Link } from "react-router-dom";
 
 const ProductCategories = () => {

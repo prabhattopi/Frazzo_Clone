@@ -28,14 +28,14 @@ export const removeFromCart = (payload) => {
   }
 }
 
-export const incCartProd = (payload) => {
+export const increaseCartProd = (payload) => {
   return {
     type: INC_CART_PROD,
     payload: payload,
   };
 };
 
-export const descCartProd = (payload) => {
+export const decreaseCartProd = (payload) => {
   return {
     type: DESC_CART_PROD,
     payload: payload,

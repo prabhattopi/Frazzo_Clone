@@ -47,7 +47,6 @@ const Footer = () => {
               <h3 className="footer_list_heading">Connect with us</h3>
 
               <div className="footer_connect_us_method">
-                {" "}
                 <HiOutlineMail className="footer_connect_us_logo" />
                 nayanvpingale@gmail.com
               </div>
@@ -73,29 +72,24 @@ const Footer = () => {
               Fresh Fruits & Vegetables Grocery Shopping Online
             </h1>
             <p>
-              The quality of fruits & vegetables is synonymous with its
-              freshness, while getting fresh fruits and vegetables is a tedious
-              task at times but with Fraazo you can get it delivered at your
-              doorstep. Fraazo brings a wide range of farm fresh fruits,
-              vegetables and dairy products to you, all in just a click. We
-              currently serve about more than 3lacs+ happy customers in Mumbai,
-              Navi Mumbai, Thane, Kalyan-Dombivli and Virar. Fraazo has made
-              online shopping of fresh produce much easier with its hassle-free
-              home delivery options. You can choose the delivery slot as per
-              your choice and schedule your order accordingly. Or you can simply
-              opt for the option of 90 mins Express Delivery and get your order
-              delivered in not more than 90 mins. The farm fresh fruits and
-              vegetables on Fraazo are available at best prices compared to
-              other vendors & supermarkets. Plus with so many exciting offers,
-              one can save up to 20% on their Monthly grocery budgets. No need
-              to wait in long queues in crowded supermarkets or local mandis for
-              getting the best prices on veggies. Kick the stress out & just
-              Fraazo your dose of freshness with savings at the comfort of your
-              home. Fraazo directly sources fresh fruits and veggies from an
-              extensive network of farmers across Maharashtra, hence bringing
-              you fresh produce straight from farm to table in less than 12
-              hours. With our Safe & Hygienic packaging and minimal multiple
-              handling, we ensure you get the best quality fresh produce.
+              The quality of fruits & vegetables is synonymous with its freshness, 
+              while getting fresh fruits and vegetables is a tedious task at times but 
+              with Fraazo you can get it delivered at your doorstep. Fraazo brings a wide 
+              range of farm fresh fruits, vegetables and dairy products to you, all in just
+              a click. We currently serve about more than 3lacs+ happy customers in Mumbai,
+              Navi Mumbai, Thane, Kalyan-Dombivli and Virar. Fraazo has made online shopping 
+              of fresh produce much easier with its hassle-free home delivery options. You can
+              choose the delivery slot as per your choice and schedule your order accordingly.
+              Or you can simply opt for the option of 90 mins Express Delivery and get your order
+              delivered in not more than 90 mins. The farm fresh fruits and vegetables on Fraazo
+              are available at best prices compared to other vendors & supermarkets. Plus with so
+              many exciting offers, one can save up to 20% on their Monthly grocery budgets. No 
+              need to wait in long queues in crowded supermarkets or local mandis for getting the
+              best prices on veggies.bKick the stress out & just Fraazo your dose of freshness with
+              savings at the comfort of your home. Fraazo directly sources fresh fruits and veggies
+              from an extensive network of farmers across Maharashtra, hence bringing you fresh
+              produce straight from farm to table in less than 18 hours. With our Safe & Hygienic
+              packaging and minimal multiple handling, we ensure you get the best quality fresh produce.
             </p>
             <p>
               The fruits and vegetables are 100% hand-picked fresh from farm,
