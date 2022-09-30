@@ -1,5 +1,7 @@
-import React, { useState,Children } from "react";
+import React, { useState,Children, useEffect } from "react";
 import "./App.css";
+import { useDispatch } from "react-redux"
+import { refreshToken } from "./Redux/user/action"
 import { Routes, Route,Navigate } from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
@@ -30,7 +32,12 @@ function PrivateRoute({isLogin,children}) {
 }
 
 function App() {
-  
+
+  const dispatch=useDispatch()
+  useEffect(()=>{
+  dispatch(refreshToken())
+
+  },[dispatch])
 
   
   const {token} = useSelector((state) => state.user);

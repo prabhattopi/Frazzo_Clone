@@ -1,8 +1,8 @@
-import { AUTH } from "./types";
+import { AUTH, RESET } from "./types";
 
 const initial = {
- 
-    token:"",
+   msg:"",
+   token:"",
     user:{}
   
 };
@@ -12,11 +12,20 @@ export const userReducer = (state = initial, { type, payload }) => {
     case AUTH:{
       return {
         ...state,
-        token:payload.token,
+        msg:payload.msg,
+      token:payload.access_token,
         user:payload.user
       }
     }
-      
+      case RESET:{
+        return {
+          ...state,
+          msg:"",
+          token:"",
+           user:{}
+
+        }
+      }
   
     default:
       return state;
