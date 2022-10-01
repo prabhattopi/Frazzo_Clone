@@ -30,7 +30,7 @@
 }
 .prod_accordion-title {
   display: flex;
-  border-bottom: 1px solid rgb(180, 180, 180);
+  border-bottom: 1px solid rgb(222, 217, 217);
   padding: 15px;
   gap: 15px;
   align-items: center;
@@ -52,6 +52,7 @@
   max-height: 300px;
   overflow-y: scroll;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .prod_accordion-content label {

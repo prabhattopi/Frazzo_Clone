@@ -57,7 +57,7 @@ const ProductsList = () => {
                   <>
                     <Link to="/products/mangoes/mangoes" className="linkTag">
                       <div className="prod_accordion-content">
-                        {">"} {"   "}Mangoes
+                        {">"} {"    "}  Mangoes
                       </div>
                     </Link>
                   </>
