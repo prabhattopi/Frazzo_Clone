@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index",
+    "start": "node index",
     "server": "cross-env NODE_ENV=development nodemon index",
     "client": "npm start --prefix ../clients",
     "dev": "concurrently \"npm run server\" \"npm run client\""
+
   },
   "keywords": [],
   "author": "",
