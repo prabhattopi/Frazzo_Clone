@@ -20,7 +20,8 @@ function SearchResults({searchResult,handlAllo}) {
     <div  className="list-group">
         {
             searchResult.map(e=>(
-                <div  className="list-group-item list-group-item-action d-flex justify-content-center align-items-center gap-2">
+          <div  className="list-group-item list-group-item-action d-flex justify-content-center align-items-center gap-2 ">
+
         <Link  to={`/products/${e._id}`} key={e._id} onClick={()=>handlAllo()} className="list-group-item list-group-item-action">
                     
                     <div style={{display:"flex",justifyContent:"space-around",alignItems:"center"}}>
