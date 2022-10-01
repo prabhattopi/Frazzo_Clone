@@ -5,7 +5,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import CheckOutCartDetails from "./CheckOutCartDetails";
 import CheckOutBillDetails from "./CheckOutBillDetails";
 import CheckOutAddForm from "./CheckOutAddForm";
@@ -48,9 +48,9 @@ export default function HorizontalLinearStepper() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  // const handleReset = () => {
+  //   setActiveStep(0);
+  // };
 
   return (
     <div className="checkout_wrapper">
@@ -73,9 +73,9 @@ export default function HorizontalLinearStepper() {
       </div>
       <div className="checkout_main_container">
         <Box className="checkout_stepper_details">
-          {activeStep == 0 && <CheckOutCartDetails />}
-          {activeStep == 1 && <CheckOutAddForm userInfo={userInfo} />}
-          {activeStep == 2 && <CheckOutStripe />}
+          {activeStep === 0 && <CheckOutCartDetails />}
+          {activeStep === 1 && <CheckOutAddForm userInfo={userInfo} />}
+          {activeStep === 2 && <CheckOutStripe />}
           <React.Fragment>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button

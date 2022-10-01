@@ -31,7 +31,7 @@ export const cartReducer = (state = initial, { type, payload }) => {
         return { ...state, cartItems: arr };
       }
       return { ...state, cartItems: [...state.cartItems, payload] };
-      case REMOVE_FROM_CART :return {...state,cartItems:state.cartItems.filter(el=>el._id!=payload._id)}
+      case REMOVE_FROM_CART :return {...state,cartItems:state.cartItems.filter(el=>el._id!==payload._id)}
     case INC_CART_PROD:
       let data = state.cartItems.map((el) => {
         if (el._id === payload._id) {
@@ -47,7 +47,7 @@ export const cartReducer = (state = initial, { type, payload }) => {
       return { ...state, cartItems: data };
     case DESC_CART_PROD:
       let new_data = state.cartItems.map((el) => {
-        if (el._id == payload._id) {
+        if (el._id === payload._id) {
           el.cart = el.cart - 1;
           return el;
         } else {

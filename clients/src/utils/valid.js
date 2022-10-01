@@ -2,7 +2,7 @@
 
 
 export const validRegister=(data)=>{
-    const {first,email,phone,last,address,password}=data
+    const {first,email,phone,last,password}=data
     const errors=[]
     if(!first||!last){
         errors.push("Please add your name.")

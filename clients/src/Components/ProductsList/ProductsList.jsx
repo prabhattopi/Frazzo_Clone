@@ -32,7 +32,7 @@ const ProductsList = () => {
   }, [subcategory]);
 
   function fiterCategory() {
-    const filterData = data.filter((el) => el.sub_category == subcategory);
+    const filterData = data.filter((el) => el.sub_category === subcategory);
 
     setProdData(filterData);
   }
