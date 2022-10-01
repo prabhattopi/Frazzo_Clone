@@ -35,7 +35,7 @@ const ProductCard = ({ prod }) => {
           <div className="product_weight_price">
             <div className="product_weight">{prod.weight}</div>
             <div className="product_price_section">
-              <div className="product_original_price">
+              <div className="product_original_price"> 
                 <BiRupee />
                 {prod.prize}
               </div>
@@ -46,6 +46,8 @@ const ProductCard = ({ prod }) => {
             </div>
           </div>
           <div className="add_cart_buttonDiv">
+
+            {/* //cart buttons */}
             {/* {presentInCart ? (
               "Added"
             ) : (
