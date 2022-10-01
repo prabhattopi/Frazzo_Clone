@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ProductDetails.css";
-import { FaCartPlus } from "react-icons/fa";
+
 import { BiRupee } from "react-icons/bi";
 import { useParams,Link } from "react-router-dom";
 import BestDeals from "../Home/BestDeals/BestDeals";

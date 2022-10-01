@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import {
 login, register,
 } from "../../Redux/user/action";
-import { toast } from "react-toastify";
+
 import { Link } from "react-router-dom";
 
 const style = {

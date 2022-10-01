@@ -1,13 +1,13 @@
 import {
 
-  Elements,  
+   
   CardElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
 import "./Checkout.css"
 import { loadStripe } from "@stripe/stripe-js";
-import { PaymentElement } from "@stripe/react-stripe-js";
+
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";

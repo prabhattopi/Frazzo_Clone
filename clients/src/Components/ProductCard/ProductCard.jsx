@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./ProductCard.css";
-import { FaCartPlus } from "react-icons/fa";
+
 import { BiRupee } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../Redux/cart/action";
+import { useSelector } from "react-redux";
+
 import AddToCartBtn from "../AddToCart Button/AddToCartBtn";
 
 const ProductCard = ({ prod }) => {
-  const dispatch = useDispatch();
+ 
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [presentInCart, setPresentInCart] = useState(false);

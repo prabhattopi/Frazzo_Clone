@@ -10,7 +10,7 @@ import KitchenStaples from "./Categories/KitchenStaples";
 import ProductCategories from "./ProductCategory/ProductCategories";
 import DownloadApp from "./DownloadApp/DownloadApp";
 import { getProducts } from "../../Redux/products/action";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
