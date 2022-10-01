@@ -1,3 +1,5 @@
+import { ALERT } from "../alert/alerts";
+
 //Action Types
 export const PROD_LOADING = "PROD_LOADING";
 
@@ -31,10 +33,15 @@ export const setAllProducts = (data) => {
 // this is gonna action creator which return a function which will have access to dispath function
 
 export const getProducts = () => (dispatch) => {
-  dispatch(setProdLoading(true));
+  dispatch({ type: ALERT, payload: { loading: true } });
 
   fetch("/fraazo")
     .then((res) => res.json())
-    .then((res) => dispatch(setAllProducts(res)))
+    .then((res) =>{
+   
+      dispatch(setAllProducts(res))
+      dispatch({ type: ALERT, payload: { loading:false } });
+    }
+      )
     .catch((err) => dispatch(setProdError(err)));
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import navbarLogo from "../../Images/fraazo-logo.svg";
 import { MdLocationOn, MdPerson, MdLogout } from "react-icons/md";
@@ -11,6 +11,8 @@ import Login from "../Login/Login";
 
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../Redux/user/action";
+import SearchResults from "./SearchResults";
+import axios from "axios";
 
 const Navbar = () => {
   const [openCart, setOpenCart] = useState(false);
@@ -22,8 +24,35 @@ const Navbar = () => {
   const user = userData.user;
 
   const dispatch = useDispatch();
+  const [queryText,setQueryText]=useState("")
+  const [searchResult,setSearchResult]=useState([])
+
+  const handleChange=(e)=>setQueryText(e.target.value)
+  
+  
+  const getData=async(text)=>{
+      let res= await axios.get(`/search?name=${text}`)
+      setSearchResult(res.data)
+  }
+  useEffect(()=>{
+      if(!queryText){
+          setSearchResult([])
+          return
+         
+    
+        
+      }
+      getData(queryText)
+      console.log(searchResult)
+
+  },[queryText])
+
+  const handlAllo=()=>{
+    setQueryText("")
+  }
 
   return (
+    <>
     <div className="navbar_wrapper">
       <div className="navbar_logo">
         <Link to="/" className="linkTag">
@@ -38,9 +67,14 @@ const Navbar = () => {
         <input
           className="navbar_search_input"
           placeholder="Find fresh vegetables, fruits and dairy..."
+         style={{transition:"0.4s ease-in"}}
+                 value={queryText}
+                 onChange={handleChange}
         />
+       
         <FaSearch className="navbar_search-icon" />
       </div>
+     
       <div className="navbar_cart" onClick={() => setOpenCart(true)}>
         <HiShoppingCart className="navbar_icon" />
         Cart
@@ -60,18 +94,18 @@ const Navbar = () => {
             {user.first}
           </div>
           {openLogout && (
-            <div className="navbar_logout">
+            <div className="navbar_logout" onClick={() =>{
+              dispatch(logout())
+
+              dispatch(reset())
+        
+              
+              }}>
               <MdLogout
                 className="navbar_icon"
               
               />
-              <div className="navbar_logout_btn" onClick={() =>{
-                dispatch(logout())
-
-                dispatch(reset())
-          
-                
-                }}>Logout</div>
+              <div className="navbar_logout_btn">Logout</div>
             </div>
           )}
         </div>
@@ -83,7 +117,18 @@ const Navbar = () => {
       )}
       <Cart openCart={openCart} setOpenCart={setOpenCart} />
       <Login open={openLogin} setOpen={setOpenLogin} />
+     
     </div>
+    {queryText && (
+<div style={{maxHeight:'70vh',padding:"0",overflow:"auto"}}>
+<div style={{paddingTop:"20px"}}>
+<div style={{borderTopWidth:'1px',paddingTop:"20px" ,paddingBottom:"20px"}}>
+<SearchResults searchResult={searchResult} handlAllo={handlAllo} />
+</div>
+</div>
+</div>
+)} 
+    </>
   );
 };
 
