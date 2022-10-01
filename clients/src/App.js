@@ -17,7 +17,7 @@ import PageNotFound from "./Components/PageNOtFound/PageNotFound";
 import Alert from "./Components/Alert/Alert";
 
 const promise = loadStripe(
-  "pk_test_51L97nDSJamWgxW3FAkAQ3D2v127yEvkP8WF8YxSyrp3mGNwOxsSoeIvQNbAAgJatwVDDVLKGxpPMWpBvypXeWVN000GizGQda3"
+  "pk_test_51LnFjiSBiw6Me9peE81aB4PuPhVgGOY87Hk98o5mCODE2h6bDNUbZwrTPvoxh2PXJya9vNKfM3jXTxYkBtV0rccJ00JHO1doiL"
 );
 function PrivateRoute({isLogin,children}) {
   if(isLogin){
@@ -40,89 +40,79 @@ function App() {
   return (
   
     <div className="App">
-
-
-      
-
-      <Navbar />
-      
-     
+          <Navbar />
           <Alert/>
-          
-    
-      
+          <div className="app_container_margin">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/login"
+                element={
+                  <>
+                    <h1>Need To Login First..!</h1>
+                    <Login open={true} setOpen={setOpen} />
+                  </>
+                }
+              />
+              <Route
+                path="/checkout"
+                element={
+                  <Elements stripe={promise}>
+                    {/* <PrivateRoute isLogin={isLoggedIn}> */}
+                    <Checkout />
+                    {!token && <Login open={true} setOpen={setOpen} />}
+                    {/* </PrivateRoute> */}
+                  </Elements>
+                }
+              />
 
-      <div className="app_container_margin">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/login"
-            element={
-              <>
-                <h1>Need To Login First..!</h1>
-                <Login open={true} setOpen={setOpen} />
-              </>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <Elements stripe={promise}>
-                {/* <PrivateRoute isLogin={isLoggedIn}> */}
-                <Checkout />
-                {!token && <Login open={true} setOpen={setOpen} />}
-                {/* </PrivateRoute> */}
-              </Elements>
-            }
-          />
+              <Route
+                path="/products/mangoes/:subcategory"
+                element={<ProductsList />}
+              />
+              <Route
+                path="/products/vegetables/:subcategory"
+                element={<ProductsList />}
+              />
+              <Route
+                path="/products/fruits/:subcategory"
+                element={<ProductsList />}
+              />
+              <Route
+                path="/products/herbs/:subcategory"
+                element={<ProductsList />}
+              />
+              <Route
+                path="/products/dryfruits/:subcategory"
+                element={<ProductsList />}
+              />
+              <Route
+                path="/products/kitchenstapels/:subcategory"
+                element={<ProductsList />}
+              />
+              <Route
+                path="/products/category/:subcategory"
+                element={<ProductsList />}
+              />
+              <Route path="/products/:id" element={<ProductDetails />} />
 
-          <Route
-            path="/products/mangoes/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/vegetables/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/fruits/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/herbs/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/dryfruits/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/kitchenstapels/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route
-            path="/products/category/:subcategory"
-            element={<ProductsList />}
-          />
-          <Route path="/products/:id" element={<ProductDetails />} />
+              <Route path="*" element={<PageNotFound/>}/>
+            </Routes>
+          </div>
 
-          <Route path="*" element={<PageNotFound/>}/>
-        </Routes>
-      </div>
-
-      <Footer />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
+          <Footer />
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss={false}
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
     </div>
 
   );

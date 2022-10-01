@@ -37,7 +37,7 @@ export default function Cart({ openCart, setOpenCart }) {
   const list = () => (
     <Box role="presentation" className="cart_container cart_list_display">
       <div className="cart_container_head">
-        <h2>My Cart ({cartItems.length} items)</h2>
+        <h2 style={{fontSize:"20px"}}>My Cart <b>{cartItems.length}</b>  items</h2>
         <Button onClick={toggleDrawer(false)}>X</Button>
       </div>
       <div className="cart_continer_body">
@@ -61,8 +61,7 @@ export default function Cart({ openCart, setOpenCart }) {
                   <div className="cart_prod_name">{ele.name}</div>
                   <div className="cart_prod_weight">{ele.weight}</div>
                   <div className="cart_prod_prize">
-                    <BiRupee />
-                    {ele.prize}
+                    <BiRupee /> <b>{ele.prize}</b> 
                   </div>
                 </div>
                 <div className="cart_prod_remove_add">

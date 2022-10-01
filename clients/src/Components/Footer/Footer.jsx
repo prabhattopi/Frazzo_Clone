@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.css";
 import { HiOutlineMail } from "react-icons/hi";
 import { TbPhoneCall } from "react-icons/tb";
-import footerDesignImg from "../../Images/footer-design.svg";
+import footerImg from "../../Images/footer-design.svg";
 import footerLogo from "../../Images/fraazo-logo-white.svg";
 import google_store_white from "../../Images/google-play-white.png";
 import apple_store_white from "../../Images/apple-store-white.png";
@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <div className="footer_section">
       <div className="footer_design_imgDiv">
-        <img src={footerDesignImg} alt="" className="footer_design_img" />
+        <img src={footerImg} alt="" className="footer_design_img" />
       </div>
 
       <div className="footer_info_wrapper">
@@ -62,8 +62,9 @@ const Footer = () => {
               <div>
                 <h3 className="footer_list_heading">Download The App</h3>
                 <div className="footer_download_from">
-                  <img src={google_store_white} alt="" />
-                  <img src={apple_store_white} alt="" />
+                  <a href="https://play.google.com/store/apps/details?id=com.fraazo.app" target="_blank"><img src={google_store_white} alt="gplay" /></a>
+                  
+                 <a href="https://apps.apple.com/us/app/fraazo/id1243998420" target="_blank"><img src={apple_store_white} alt="" /></a> 
                 </div>
               </div>
             </div>
