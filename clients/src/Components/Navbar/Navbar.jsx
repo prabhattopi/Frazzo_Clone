@@ -122,9 +122,9 @@ const Navbar = () => {
      
     </div>
     {queryText && (
-<div style={{maxHeight:'70vh',padding:"0",overflow:"auto"}}>
+<div style={{maxHeight:'30vh',padding:"0",overflow:"scroll",marginTop:"20px"}}>
 <div style={{paddingTop:"20px"}}>
-<div style={{borderTopWidth:'1px',paddingTop:"20px" ,paddingBottom:"20px"}}>
+<div style={{borderTopWidth:'1px',paddingTop:"20px" ,paddingBottom:"20px",height:"100px",overflow:"scroll"}}>
 <SearchResults searchResult={searchResult} handlAllo={handlAllo} />
 </div>
 </div>
