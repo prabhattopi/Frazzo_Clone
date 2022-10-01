@@ -59,7 +59,12 @@ app.get("/search",cors(),async(req,res)=>{
               _id:1,
               name:1,
               image:1,
-              benifit:1
+              benifit:1,
+              weight:1,
+              prize:1,
+              old_prize:1
+
+
           }
       }
   ]

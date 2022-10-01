@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../Redux/user/action";
 import SearchResults from "./SearchResults";
 import axios from "axios";
+import { PrivateRoute } from "../../App";
 
 const Navbar = () => {
   const [openCart, setOpenCart] = useState(false);
@@ -74,12 +75,13 @@ const Navbar = () => {
        
         <FaSearch className="navbar_search-icon" />
       </div>
-     
+     {/* <PrivateRoute isLogin={userData.token}> */}
       <div className="navbar_cart" onClick={() => setOpenCart(true)}>
         <HiShoppingCart className="navbar_icon" />
         Cart
         <div className="cart_item_count">{cartItems.length}</div>
       </div>
+      {/* </PrivateRoute> */}
       <div className="navbar_credit">
         <IoIosWallet className="navbar_icon" />
         Credit
