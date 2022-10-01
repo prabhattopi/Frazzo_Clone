@@ -75,7 +75,7 @@ export default function HorizontalLinearStepper() {
         <Box className="checkout_stepper_details">
           {activeStep === 0 && <CheckOutCartDetails />}
           {activeStep === 1 && <CheckOutAddForm userInfo={userInfo} />}
-          {activeStep === 2 && <CheckOutStripe />}
+          {/* {activeStep === 2 && <CheckOutStripe />} */}
           <React.Fragment>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
