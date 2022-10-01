@@ -90,7 +90,8 @@
 }
 .cart_footer_checkout_btn {
   width: 200px;
-  padding: 15px 20px;
+  height: 46px;
+  padding: 12px 40px;
   color: white;
   background: rgb(116, 198, 179);
   border: none;
@@ -100,6 +101,10 @@
   font-size: 16px;
   cursor: pointer;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.cart_footer_checkout_btn:hover{
+  background-color: rgb(39, 113, 96)
 }
 .cart_list_display{
   width:450px;
