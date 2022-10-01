@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import { settings } from "../CommonSlider";
 import ProductCard from "../../ProductCard/ProductCard";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 const Vegetables = () => {
   const data = useSelector((state) =>
