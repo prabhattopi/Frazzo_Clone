@@ -21,7 +21,7 @@ const Fruits = () => {
       <div className="category_slider">
         <Slider {...settings}>
           {data.map((ele) => (
-            <ProductCard prod={ele} />
+            <ProductCard key={ele} prod={ele} />
           ))}
         </Slider>
       </div>

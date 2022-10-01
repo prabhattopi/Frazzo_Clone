@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./BestDeals.css";
 import Slider from "react-slick";
 import { settings } from "../CommonSlider";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import ProductCard from "../../ProductCard/ProductCard";
 
 const BestDeals = () => {
@@ -17,7 +17,7 @@ const BestDeals = () => {
         {data !== null && (
           <Slider {...settings}>
             {data.map((ele) => (
-              <ProductCard prod={ele} />
+              <ProductCard key={ele} prod={ele} />
             ))}
           </Slider>
         )}
