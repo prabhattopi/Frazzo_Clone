@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { useDispatch } from "react-redux"
 import { refreshToken } from "./Redux/user/action"
-import { Routes, Route,Navigate } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
 import Home from "./Components/Home/Home";
 import Checkout from "./Components/Checkout/Checkout";
@@ -22,14 +22,14 @@ import Active from "./Components/Login/Active";
 const promise = loadStripe(
   "pk_test_51L97nDSJamWgxW3FAkAQ3D2v127yEvkP8WF8YxSyrp3mGNwOxsSoeIvQNbAAgJatwVDDVLKGxpPMWpBvypXeWVN000GizGQda3"
 );
-function PrivateRoute({isLogin,children}) {
-  if(isLogin){
-    return children
-  }
+// export const PrivateRoute=({isLogin,children})=>{
+//   if(isLogin){
+//     return children
+//   }
 
-  return <Navigate to="/login"></Navigate>
+//   return <Navigate to="/login"></Navigate>
 
-}
+// }
 
 function App() {
 
