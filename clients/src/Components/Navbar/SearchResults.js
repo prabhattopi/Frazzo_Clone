@@ -27,7 +27,7 @@ function SearchResults({searchResult,handlAllo}) {
                     <p>{e.name}</p> 
                     
                     <p><BiRupee /> {e.prize}</p>
-                    <p>{e.old_prize && <BiRupee />}</p>
+                    <p style={{textDecoration:"line-through", color:"brown"}}>{e.old_prize }<BiRupee /></p>
                     <p>{e.weight}</p>
                     <AddToCartBtn prod={product} />
 
