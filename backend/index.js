@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
 const cors = require("cors");
-
+const Fraazo = require("./src/models/frazomodels");
 const cookieParser = require("cookie-parser");
 
 const connectDB = require("./src/config/db");
@@ -33,6 +33,47 @@ if (process.env.NODE_ENV === "development") {
 }
 app.use("/api", require("./src/routes/authroute"));
 app.use("/fraazo", frazoController);
+app.get("/search",cors(),async(req,res)=>{
+  try{
+
+  const {name}=req.query
+
+  const agg=[
+      {
+          $search:{
+              autocomplete:{
+                  query:name,
+                  path:"name",
+                  fuzzy:{
+                      maxEdits:2
+                  }
+              }
+          }
+         
+      },
+      {
+          $limit:5
+      },
+      {
+          $project:{
+              _id:1,
+              name:1,
+              image:1,
+              benifit:1
+          }
+      }
+  ]
+const response= await Fraazo.aggregate(agg)
+
+return res.status(200).json(response)
+
+  
+  }
+  catch(err){
+return res.json([])
+  }
+})
+
 const PORT = process.env.PORT || 4000;
 
 app.listen(
