@@ -72,6 +72,10 @@
   border: 1.5px solid #4fbb90;
   cursor: pointer;
 }
+.cart_prod_reduce:hover{
+  color: white;
+  background-color: #267656;
+}
 .cart_prod_add {
   padding: 5px 15px 5px 10px;
   color: #4fbb90;
@@ -80,6 +84,10 @@
   border-bottom-right-radius: 15px;
   border: 1.5px solid #4fbb90;
   cursor: pointer;
+}
+.cart_prod_add:hover{
+  color: white;
+  background-color: #267656;
 }
 .cart_container_footer {
   padding: 15px 20px 10px 20px;
