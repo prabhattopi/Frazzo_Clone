@@ -58,10 +58,12 @@ export const refreshToken = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
+    dispatch({ type: ALERT, payload: { loading: true } });
+    
     localStorage.removeItem("logged");
     await getAPI("logout")
   
-
+    dispatch({ type: ALERT, payload: { loading: false } });
   } catch (err) {
     dispatch({ type: ALERT, payload: { errors: err.response.data.msg } });
   }

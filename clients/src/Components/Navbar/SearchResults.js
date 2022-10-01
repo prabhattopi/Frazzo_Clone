@@ -6,36 +6,42 @@ import { useState ,useEffect} from "react";
 
 
 function SearchResults({searchResult,handlAllo}) {
-  const { id } = useParams();
-  const [product, setProduct] = useState({});
-  useEffect(() => {
-    fetch(`/fraazo/${id}`)
-      .then((res) => res.json())
-      .then((res) => setProduct(res));
-    window.scrollTo(0, 0);
-  }, [id]);
+//   const { _id } = useParams();
+//   const [product, setProduct] = useState({});
+//   useEffect(() => {
+//     fetch(`/fraazo/products/${_id}`)
+//       .then((res) => res.json())
+//       .then((res) => setProduct(res));
+//     window.scrollTo(0, 0);
+//   }, [id]);
 
   
   return (
     <div  className="list-group">
         {
             searchResult.map(e=>(
+                <div  className="list-group-item list-group-item-action d-flex justify-content-center align-items-center gap-2 mt-5">
         <Link  to={`/products/${e._id}`} key={e._id} onClick={()=>handlAllo()} className="list-group-item list-group-item-action">
                     
                     <div style={{display:"flex",justifyContent:"space-around",alignItems:"center"}}>
-                    <img style={{width:"80px"}} src={e.image} alt=""/>
-                    <p>{e.name}</p> 
+                    <img style={{width:"80px",objectFit:"cover"}} src={e.image} alt=""/>
+                    <p>{e.name.split(" ").length<2?e.name:e.name.split(" ").splice(0,1).join(" ")+"..."}</p> 
                     
                     <p><BiRupee /> {e.prize}</p>
-                    <p style={{textDecoration:"line-through", color:"brown"}}>{e.old_prize }<BiRupee /></p>
+                    <p style={{textDecoration:"line-through", color:"brown"}}>{!e.old_prize?e.prize+10:e.old_prize }<BiRupee /></p>
                     <p>{e.weight}</p>
-                    <AddToCartBtn prod={product} />
-
+                   
+                  
 
                     </div>
+                    </Link>
+                    <div className="w-3">
+                <AddToCartBtn prod={e} />
+                </div>
+                </div>
             
             
-        </Link>
+ 
             ))
         }
   
