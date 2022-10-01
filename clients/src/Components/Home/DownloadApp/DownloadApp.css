@@ -3,21 +3,23 @@
   background-image: url("../../../Images/contactBaground.svg");
   background-repeat: no-repeat;
   justify-content: space-between;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   gap: 50px;
+
 }
 
 .download_app_mobiles {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 0 auto;
 }
 .mobiles_img {
-  width: 400px;
+  width: 580px;
 }
 .download_app_infoDiv {
   padding: 80px;
+  width: 50%;
 }
 .download_app_infoDiv h1,
 .download_app_infoDiv h3 {
@@ -93,7 +95,7 @@
 }
 @media (max-width: 499px) {
  .download_app_section{
-  flex-direction:column;  
+  flex-direction:column; 
  }
  .download_app_mobiles {
   width:200px;
@@ -102,7 +104,19 @@
   width:100%;
  }
  .download_app_infoDiv {
+  width:100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
+  margin: auto;
+}
+.download_for_section{
+  margin: auto;;
+}
+.download_available_on{
+  display: flex;
+  flex-direction: column;
 }
 .download_submit_button,.download_input_mobile{
   width:350px;

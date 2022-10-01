@@ -87,6 +87,19 @@
 
 }
 
+.list-group{
+  width: 610px;
+  margin-left: 24%;
+  position: absolute;
+  z-index: 99;
+  margin-top: 0.5%;
+  /* position: sticky; */
+}
+
+
+
+
+
 @media (max-width: 499px) {
  .navbar_search_bar,.navbar_credit {
   display: none;

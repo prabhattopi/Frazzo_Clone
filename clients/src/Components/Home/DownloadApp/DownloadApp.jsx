@@ -39,9 +39,11 @@ const DownloadApp = () => {
           <button className="download_submit_btn">SUBMIT</button>
         </div>
         <div className="download_available_on">
-          Available on{" "}
-          <img src={googleDownload} alt="" className="download_from_google" />
-          <img src={iosDownload} alt="" className="download_from_ios" />
+          Available on
+          {/* <img src={googleDownload} alt="" className="download_from_google" />
+          <img src={iosDownload} alt="" className="download_from_ios" /> */}
+          <a href="https://play.google.com/store/apps/details?id=com.fraazo.app" target="_blank" rel="noopener noreferrer"><img src={googleDownload} alt="" /></a>
+          <a href="https://apps.apple.com/us/app/fraazo/id1243998420"><img src={iosDownload} alt="" /></a>
         </div>
       </div>
     </div>

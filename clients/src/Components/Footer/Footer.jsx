@@ -62,8 +62,9 @@ const Footer = () => {
               <div>
                 <h3 className="footer_list_heading">Download The App</h3>
                 <div className="footer_download_from">
-                  <img src={google_store_white} alt="" />
-                  <img src={apple_store_white} alt="" />
+                  <a href="https://play.google.com/store/apps/details?id=com.fraazo.app" target="_blank" rel="noopener noreferrer"><img src={google_store_white} alt="" /></a>
+                  <a href="https://apps.apple.com/us/app/fraazo/id1243998420"><img src={apple_store_white} alt="" /></a>
+                  
                 </div>
               </div>
             </div>
