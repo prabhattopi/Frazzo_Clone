@@ -17,7 +17,7 @@ const BestDeals = () => {
         {data !== null && (
           <Slider {...settings}>
             {data.map((ele) => (
-              <ProductCard prod={ele} />
+              <ProductCard key={ele} prod={ele} />
             ))}
           </Slider>
         )}
