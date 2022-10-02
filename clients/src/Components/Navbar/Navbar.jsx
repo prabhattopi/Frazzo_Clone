@@ -8,14 +8,17 @@ import { HiShoppingCart } from "react-icons/hi";
 import { FaSearch } from "react-icons/fa";
 import Cart from "../Cart/Cart";
 import Login from "../Login/Login";
-
+import { API_URL } from "../../utils/config";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../Redux/user/action";
 import SearchResults from "./SearchResults";
 import axios from "axios";
 import { PrivateRoute } from "../../App";
+axios.defaults.withCredentials=true
+
 
 const Navbar = () => {
+  
   const [openCart, setOpenCart] = useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
   const [openLogout, setOpenLogout] = useState(false);
@@ -32,7 +35,7 @@ const Navbar = () => {
   
   
   const getData=async(text)=>{
-      let res= await axios.get(`/search?name=${text}`)
+      let res= await axios.get(`${API_URL}/search?name=${text}`)
       setSearchResult(res.data)
   }
   useEffect(()=>{

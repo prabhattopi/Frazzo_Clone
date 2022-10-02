@@ -1,4 +1,6 @@
 import { ALERT } from "../alert/alerts";
+import { API_URL } from "../../utils/config";
+import axios from "axios";
 
 //Action Types
 export const PROD_LOADING = "PROD_LOADING";
@@ -32,16 +34,22 @@ export const setAllProducts = (data) => {
 
 // this is gonna action creator which return a function which will have access to dispath function
 
-export const getProducts = () => (dispatch) => {
-  dispatch({ type: ALERT, payload: { loading: true } });
+export const getProducts =() =>async(dispatch) => {
 
-  fetch("/fraazo")
-    .then((res) => res.json())
-    .then((res) =>{
+  try{
+    dispatch({ type: ALERT, payload: { loading: true } });
+
+    let res=await axios.get(`${API_URL}/fraazo`)
+      
+     
+        dispatch(setAllProducts(res.data))
+        dispatch({ type: ALERT, payload: { loading:false } });
+  }
+  catch(err){
+    dispatch(setProdError(err))
+  }
+  
+    
+      
    
-      dispatch(setAllProducts(res))
-      dispatch({ type: ALERT, payload: { loading:false } });
-    }
-      )
-    .catch((err) => dispatch(setProdError(err)));
 };
