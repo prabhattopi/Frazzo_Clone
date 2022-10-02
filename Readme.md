@@ -38,7 +38,7 @@
 
 3. Search bar
 
-![image](assets/Search.png) 
+![image](assets/SearchBar.png) 
 
 4. Product Page
 
