@@ -17,7 +17,7 @@ function SearchResults({searchResult,handlAllo}) {
 
   
   return (
-    <div  className="list-group">
+    <div  className="list-group" style={{maxHeight:'70vh',padding:"0",overflow:"scroll"}}>
         {
             searchResult.map(e=>(
           <div  className="list-group-item list-group-item-action d-flex justify-content-center align-items-center gap-2 ">

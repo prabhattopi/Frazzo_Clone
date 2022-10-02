@@ -15,7 +15,7 @@ const CheckOutCartDetails = () => {
       {cartItems.map((el) => (
         <div className="checkou_cart_item">
           <div className="checkout_cart_Item_img">
-            <img src={el.image} />
+            <img src={el.image} alt="" />
           </div>
           <div className="checkout_cart_item_name">
             <h4>{el.name}</h4>
