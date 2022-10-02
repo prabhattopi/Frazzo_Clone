@@ -7,7 +7,8 @@
     "start": "node index",
     "server": "cross-env NODE_ENV=development nodemon index",
     "client": "npm start --prefix ../clients",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "render": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../clients && npm run build --prefix ../clients"
 
   },
   "keywords": [],

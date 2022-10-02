@@ -81,6 +81,16 @@ return res.json([])
 
 const PORT = process.env.PORT || 4000;
 
+if(process.env.NODE_ENV==="production"){
+  app.use(express.static(path.join(__dirname,"../clients/build")))
+  app.get("*",(req,res)=>res.sendFile(path.resolve(__dirname,'../','clients','build','index.html')))
+
+}
+else{
+  app.get('/',(req,res)=>res.send("Please Set to Production"))
+}
+
+
 app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
